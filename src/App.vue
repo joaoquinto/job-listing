@@ -1,12 +1,12 @@
 <script setup>
 import { computed, ref } from 'vue'
 
-import Jobs from '@/assets/mock/Jobs.json'
+import Jobs from '../public/Jobs.json'
 
 import FilterJobs from '@/components/Filters/FilterJobs.vue'
 import CardJob from '@/components/Cards/CardJob.vue'
 
-const filters = ref(['html'])
+const filters = ref(['HTML5'])
 const jobs = ref(Object.assign({}, Jobs))
 const allowedToViewFilters = computed(() => filters.value.length > 0)
 
@@ -24,9 +24,7 @@ const marginJobs = computed(() => {
     <header class="header"></header>
     <FilterJobs v-model:filters="filters" v-show="allowedToViewFilters" />
     <main class="main">
-      <div>
         <CardJob v-for="job in jobs" :key="job.id" :job="job" />
-      </div>
     </main>
   </section>
 </template>
@@ -52,7 +50,7 @@ const marginJobs = computed(() => {
   align-self: center;
   margin: v-bind(marginJobs) 0 90px 0;
   width: 90%;
-  height: 100vh;
+  height: 100%;
 }
 
 @media (width > 501px) {

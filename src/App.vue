@@ -1,47 +1,64 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { computed, ref } from 'vue'
+
+import Jobs from '@/assets/mock/Jobs.json'
+
+import FilterJobs from '@/components/Filters/FilterJobs.vue'
+import CardJob from '@/components/Cards/CardJob.vue'
+
+const filters = ref(['html'])
+const jobs = ref(Object.assign({}, Jobs))
+const allowedToViewFilters = computed(() => filters.value.length > 0)
+
+const marginJobs = computed(() => {
+  if (allowedToViewFilters.value) {
+    return '10px'
+  }else {
+    return '80px'
+  }
+})
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <section class="container">
+    <header class="header"></header>
+    <FilterJobs v-model:filters="filters" v-show="allowedToViewFilters" />
+    <main class="main">
+      <div>
+        <CardJob v-for="job in jobs" :key="job.id" :job="job" />
+      </div>
+    </main>
+  </section>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.header {
+  background-color: var(--primary);
+  background-image: url('@/assets/images/bg-header-mobile.svg');
+  height: 20dvh;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+.main {
+  align-self: center;
+  margin: v-bind(marginJobs) 0 90px 0;
+  width: 90%;
+  height: 100vh;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+@media (width > 501px) {
+  .header {
+    background-image: url('@/assets/images/bg-header-desktop.svg');
+    height: 15dvh;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 
-import Jobs from '../public/mock/Jobs.json'
+import Jobs from '@/assets/mock/Jobs.json'
 
 import FilterJobs from '@/components/Filters/FilterJobs.vue'
 import CardJob from '@/components/Cards/CardJob.vue'

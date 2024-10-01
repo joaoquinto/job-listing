@@ -19,7 +19,7 @@ function removeFilterItem(index) {
 <template>
   <div class="container-filters">
     <div class="filters">
-     <FilterItem v-for="(name, index) in filters" :key="index" :name @update:remove="(item)=> removeFilterItem(index) " />
+     <FilterItem v-for="(name, index) in filters" :key="index" :name @update:remove="()=> removeFilterItem(index) " />
     </div>
     <button class="clear-filters" @click="clearFilters">
       Clear

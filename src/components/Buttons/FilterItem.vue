@@ -1,11 +1,11 @@
 <script setup>
 defineProps({ name: String })
-defineEmits(["update:remove"])
+defineEmits(['update:remove'])
 </script>
 
 <template>
   <div class="filter">
-    <h3 class="filter-name">{{ name }}</h3>
+    <p class="filter-name">{{ name }}</p>
     <div class="filter-remove" @click="$emit('update:remove')">
       <img src="@/assets/images/icon-remove.svg" alt="icon remove" />
     </div>
@@ -39,7 +39,7 @@ defineEmits(["update:remove"])
     cursor: pointer;
 
     &:hover {
-      background-color: var(--dark-grayish-cyan);
+      background-color: var(--primary-dark);
     }
   }
 }

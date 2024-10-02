@@ -1,29 +1,26 @@
 <script setup>
-
 import FilterItem from '@/components/Buttons/FilterItem.vue'
 
-const filters = defineModel("filters", {type: Array, default: () => []});
+const filters = defineModel('filters', { type: Array, default: () => [] })
 
-const clearFilters = ()=> filters.value = [];
+const clearFilters = () => (filters.value = [])
 
 function removeFilterItem(index) {
-  if (index ?? false) return;
-  filters.value.splice(index, 1);
+  filters.value.splice(index, 1)
 }
-
-
-
-
 </script>
 
 <template>
   <div class="container-filters">
     <div class="filters">
-     <FilterItem v-for="(name, index) in filters" :key="index" :name @update:remove="()=> removeFilterItem(index) " />
+      <FilterItem
+        v-for="(name, index) in filters"
+        :key="index"
+        :name
+        @update:remove="removeFilterItem(index)"
+      />
     </div>
-    <button class="clear-filters" @click="clearFilters">
-      Clear
-    </button>
+    <button class="clear-filters" @click="clearFilters">Clear</button>
   </div>
 </template>
 
@@ -40,17 +37,17 @@ function removeFilterItem(index) {
   gap: 20px;
   border-radius: 8px;
   background-color: #ffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);}
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
 
-
-.filters{
+.filters {
   flex: 1;
   display: flex;
   gap: 16px;
   overflow-x: scroll;
 }
 
-.clear-filters{
+.clear-filters {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -59,8 +56,7 @@ function removeFilterItem(index) {
   font-family: 'League Spartan', sans-serif;
   font-size: 1rem;
 
-
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
 }

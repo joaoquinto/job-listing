@@ -157,10 +157,19 @@ const jobs = ref([
     tools: ['React', 'Sass']
   }
 ])
-const filteredJobs = ref([])
 
 const listJobs = computed(() => {
-  if (filteredJobs.value.length > 0) return filteredJobs.value
+  if (filters.value.length > 0) {
+    return jobs.value.filter((job) =>
+      filters.value.every(
+        (key) =>
+          job.role === key ||
+          job.level === key ||
+          job.languages.includes(key) ||
+          job.tools.includes(key)
+      )
+    )
+  }
   return jobs.value
 })
 const allowedToViewFilters = computed(() => filters.value.length > 0)
@@ -174,26 +183,6 @@ function setFilter(value) {
   if (filterAlreadyInFilters(value)) return
   filters.value.push(value)
 }
-
-function handleFilterJobs(filtersValues) {
-  filteredJobs.value = jobs.value.filter((job) =>
-    filtersValues.every(
-      (key) =>
-        job.role === key ||
-        job.level === key ||
-        job.languages.includes(key) ||
-        job.tools.includes(key)
-    )
-  )
-}
-
-watch(
-  filters,
-  (newVal) => {
-    handleFilterJobs(newVal)
-  },
-  { deep: true }
-)
 </script>
 
 <template>

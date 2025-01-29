@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 import FilterJobs from '@/components/Filters/FilterJobs.vue'
 import CardJob from '@/components/Cards/CardJob.vue'

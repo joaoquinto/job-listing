@@ -1,7 +1,6 @@
 <script setup>
 import AccountIcon from '@/components/Icons/AccountIcon.vue'
 import AirFilterIcon from '@/components/Icons/AirFilterIcon.vue'
-import FaceItIcon from '@/components/Icons/FaceItIcon.vue'
 import InsureIcon from '@/components/Icons/InsureIcon.vue'
 import LoopStudiosIcon from '@/components/Icons/LoopStudiosIcon.vue'
 import ManageIcon from '@/components/Icons/ManageIcon.vue'
@@ -13,16 +12,17 @@ import EyeCamIcon from '@/components/Icons/EyeCamIcon.vue'
 import { computed } from 'vue'
 import BadgeItem from '@/components/Badges/BadgeItem.vue'
 import FilterButton from '@/components/Buttons/FilterButton.vue'
+import FaceIcon from '@/components/Icons/FaceIcon.vue'
 
 defineProps({ job: Object })
 defineEmits(['update:filter'])
 
 const handleIcons = computed(() => {
   return {
+    FaceIcon,
     AccountIcon,
     AirFilterIcon,
     EyeCamIcon,
-    FaceItIcon,
     InsureIcon,
     LoopStudiosIcon,
     ManageIcon,
@@ -74,8 +74,7 @@ const handleIcons = computed(() => {
         />
       </div>
     </div>
-    </div>
-
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -87,9 +86,11 @@ const handleIcons = computed(() => {
   border-radius: 6px 8px 8px 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   background-color: #fff;
+
   & + & {
     margin-top: 24px;
   }
+
   &-header {
     display: flex;
     align-items: baseline;
@@ -102,7 +103,7 @@ const handleIcons = computed(() => {
   }
 }
 
-.container-infos{
+.container-infos {
   display: flex;
   flex-direction: column;
 }
@@ -128,6 +129,7 @@ const handleIcons = computed(() => {
 
   .item {
     color: var(--dark-grayish-cyan);
+
     &:nth-child(2) {
       &::before,
       &::after {
@@ -136,6 +138,7 @@ const handleIcons = computed(() => {
         color: var(--dark-grayish-cyan);
       }
     }
+
     & + & {
       margin-left: 16px;
     }
@@ -156,27 +159,25 @@ const handleIcons = computed(() => {
   gap: 16px;
 }
 
-
-@media (width > 1000px){
-  .card{
+@media (width > 1000px) {
+  .card {
     flex-direction: row;
     align-items: center;
   }
 
-  .company-logo{
+  .company-logo {
     margin-bottom: 0;
     margin-right: 24px;
   }
 
-  .line{
+  .line {
     display: none;
   }
 
-  .container-infos{
+  .container-infos {
     width: 100%;
     justify-content: space-between;
     flex-direction: row;
   }
-
 }
 </style>

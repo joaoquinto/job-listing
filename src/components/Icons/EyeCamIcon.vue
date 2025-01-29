@@ -3,7 +3,12 @@ defineProps({ width: { type: Number, default: 88 }, height: { type: Number, defa
 </script>
 
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" :width :height>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    :width="width"
+    :height="height"
+  >
     <defs>
       <linearGradient id="a" x1="50%" x2="50%" y1="0%" y2="98.044%">
         <stop offset="0%" stop-color="#43E2DF" />

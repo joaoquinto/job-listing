@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 
 import FilterJobs from '@/components/Filters/FilterJobs.vue'
 import CardJob from '@/components/Cards/CardJob.vue'
+import FaceIcon from '@/components/Icons/FaceIcon.vue'
 
 const filters = ref([])
 const jobs = ref([
@@ -309,6 +310,12 @@ const jobsClone = ref([
     tools: ['React', 'Sass']
   }
 ])
+const filteredJobs = ref([])
+
+const listJobs = computed(() => {
+  if (filteredJobs.value.length > 0) return filteredJobs.value
+  return jobs.value
+})
 const allowedToViewFilters = computed(() => filters.value.length > 0)
 const marginJobs = computed(() => (allowedToViewFilters.value ? '10px' : '80px'))
 
@@ -321,22 +328,22 @@ function setFilter(value) {
   filters.value.push(value)
 }
 
-function filterJobs(FILTERS) {
-  if (FILTERS.length === 0) {
-    jobs.value = jobsClone.value
-    return
-  }
-
-  const tags = jobsClone.value.map((job) => {
-    return [job.role, job.level, ...job.languages, ...job.tools]
-  })
-
+function handleFilterJobs(filtersValues) {
+  filteredJobs.value = jobs.value.filter((job) =>
+    filtersValues.every(
+      (key) =>
+        job.role === key ||
+        job.level === key ||
+        job.languages.includes(key) ||
+        job.tools.includes(key)
+    )
+  )
 }
 
 watch(
   filters,
-  (newValues) => {
-    filterJobs(newValues)
+  (newVal) => {
+    handleFilterJobs(newVal)
   },
   { deep: true }
 )
@@ -348,7 +355,7 @@ watch(
     <FilterJobs v-model:filters="filters" v-show="allowedToViewFilters" />
     <main class="main">
       <CardJob
-        v-for="job in jobs"
+        v-for="job in listJobs"
         :key="job.id"
         :job="job"
         @update:filter="(value) => setFilter(value)"
